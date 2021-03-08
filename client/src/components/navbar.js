@@ -48,6 +48,11 @@ class Navbar extends Component {
                 >
                   <span className='text-secondary'>logout</span>
                 </Link>
+                <li className="nav-item">
+                            <Link className="nav-link" to='/add-article'>
+                                Add Article
+                            </Link>
+                        </li>
               </section>
             ) : (
               <section className='navbar-section'>

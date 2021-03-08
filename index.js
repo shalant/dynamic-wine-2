@@ -65,6 +65,10 @@ mongoose
         res.sendFile(path.join(__dirname + '/client/public/index.html'));
       });
 
+      //adding articles routes...
+      const articlesRouter = require('./routes/articles');
+      app.use('/articles', articlesRouter)
+
       // Starting Server
       app.listen(PORT, () => {
         console.log(`App listening on PORT: ${PORT}`);

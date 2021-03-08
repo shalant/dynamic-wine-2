@@ -6,6 +6,7 @@ import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
 import Home from './components/home';
+import AddArticle from './components/AddArticle'
 
 class App extends Component {
   constructor() {
@@ -67,6 +68,8 @@ class App extends Component {
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
         <Route path='/signup' render={() => <Signup />} />
+        <Route path='/add-article' component={AddArticle} />
+
       </div>
     );
   }
