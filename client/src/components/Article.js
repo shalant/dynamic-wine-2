@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import spinner from '../../spinner.gif'
+import spinner from './spinner.gif'
 import {Link} from 'react-router-dom';
 
 const Article = props => {

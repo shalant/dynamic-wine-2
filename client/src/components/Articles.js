@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import spinner from '../../spinner.gif';
+import spinner from './spinner.gif';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 

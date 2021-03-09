@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState, useEffect, componentDidMount } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 // components
@@ -11,31 +11,37 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 import EditArticle from './components/EditArticle';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loggedIn: false,
-      username: null,
-    };
+const App = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
+    
+    // this.state = {
+    //   loggedIn: false,
+    //   username: null,
+    // };
 
-    this.getUser = this.getUser.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-  };
+    // this.getUser = this.getUser.bind(this);
+    // this.componentDidMount = this.componentDidMount.bind(this);
+    // this.updateUser = this.updateUser.bind(this);
+  
 
-//from 80/20
-const [post, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
-  componentDidMount() {
-    this.getUser();
-  }
+  useEffect(() => {
+    axios
+      .get('/articles')
+      .then(res => setPosts(res.data))
+      .catch(error => console.log(error));
+  })
 
-  updateUser(userObject) {
+//   componentDidMount(() => {
+//     this.getUser();
+//   });
+
+  const updateUser = ((userObject) => {
     this.setState(userObject);
-  }
+  });
 
-  getUser() {
+  const getUser = (() => {
     axios
       .get('/api/user/')
       .then((response) => {
@@ -59,12 +65,11 @@ const [post, setPosts] = useState([]);
         }
       })
       .catch((err) => console.log('err', err));
-  }
+  });
 
-  render() {
     return (
       <div className='App'>
-        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        <Navbar {/*updateUser={this.updateUser} loggedIn={this.state.loggedIn} */} />
         {/* greet user if logged in: */}
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         {/* Routes to different components */}
@@ -87,7 +92,6 @@ const [post, setPosts] = useState([]);
 
       </div>
     );
-  }
 }
 
 export default App;
