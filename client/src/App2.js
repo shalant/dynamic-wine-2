@@ -1,6 +1,6 @@
-import React, { useState, useEffect, componentDidMount } from 'react';
+import React, { Component, setState, useEffect } from 'react';
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // components
 import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
@@ -11,12 +11,9 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 import EditArticle from './components/EditArticle';
 
-function App(props) {
-  //from nimblewebdeveloper
-  const [loggedIn, setLoggedIn] = useState(0);
-  const [username, setUsername] = useState('');  
-
-
+function App (props) {
+  
+   
     // this.state = {
     //   loggedIn: false,
     //   username: null,
@@ -25,34 +22,21 @@ function App(props) {
     // this.getUser = this.getUser.bind(this);
     // this.componentDidMount = this.componentDidMount.bind(this);
     // this.updateUser = this.updateUser.bind(this);
-  
 
-  const [posts, setPosts] = useState([])
 
-  useEffect(() => {
-    axios
-      .get('/articles')
-      .then(res => setPosts(res.data))
-      .catch(error => console.log(error));
-  })
+//from 80/20
+const [post, setPosts] = useState([]);
 
-//   componentDidMount(() => {
+//   componentDidMount() {
 //     this.getUser();
-//   });
-
-useEffect(() => {
-  
-}, [])
+//   }
 
 
-const updateUser = userObject => {
-  setUsername(userObject)
-}
-  // const updateUser = ((userObject) => {
-  //   this.setState(userObject);
-  // });
+  const updateUser = (userObject) => {
+    this.setState(userObject);
+  }
 
-  const getUser = (() => {
+  const getUser = (e) => {
     axios
       .get('/api/user/')
       .then((response) => {
@@ -76,11 +60,18 @@ const updateUser = userObject => {
         }
       })
       .catch((err) => console.log('err', err));
-  });
+  }
+
+  useEffect(() => {
+    axios
+      .get('/articles')
+      .then(res => setPosts(res.data))
+      .catch(error => console.log(error));
+  })
 
     return (
       <div className='App'>
-        <Navbar {/*updateUser={this.updateUser} loggedIn={this.state.loggedIn} */} />
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
         {/* greet user if logged in: */}
         {this.state.loggedIn && <p>Join the party, {this.state.username}!</p>}
         {/* Routes to different components */}
@@ -90,7 +81,7 @@ const updateUser = userObject => {
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
         <Route path='/signup' render={() => <Signup />} />
-        <Route exact path='/' render={() => <Articles posts={posts} />} />
+       <Route exact path='/' render={() => <Articles posts={posts} />} />
       <Route 
         path='/article/:id' 
         render={props => <Article {...props} posts={posts} />} 
@@ -99,10 +90,10 @@ const updateUser = userObject => {
         path='/update/:id' 
         render={props => <EditArticle {...props} posts={posts} />} 
       />
-        <Route path='/add-article' component={AddArticle} />
+        <Route path='/add-article' component={AddArticle} /> 
 
       </div>
-    );
-}
+    )
+    }
 
 export default App;

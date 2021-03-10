@@ -1,3 +1,8 @@
+:root {
+  --light-green: #299;
+  --dark-green: #277;
+}
+
 .App {
   text-align: center;
 }

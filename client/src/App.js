@@ -1,15 +1,15 @@
-import React, { Component, useState } from 'react';
+import React, { Component, setState } from 'react';
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // components
 import Signup from './components/sign-up';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
 import Home from './components/home';
 import AddArticle from './components/AddArticle';
-import Articles from './components/Articles';
-import Article from './components/Article';
-import EditArticle from './components/EditArticle';
+// import Articles from './components/Articles';
+// import Article from './components/Article';
+// import EditArticle from './components/EditArticle';
 
 class App extends Component {
   constructor() {
@@ -25,7 +25,7 @@ class App extends Component {
   };
 
 //from 80/20
-const [post, setPosts] = useState([]);
+//const [post, setPosts] = useState([]);
 
   componentDidMount() {
     this.getUser();
@@ -74,16 +74,16 @@ const [post, setPosts] = useState([]);
           render={() => <LoginForm updateUser={this.updateUser} />}
         />
         <Route path='/signup' render={() => <Signup />} />
-        <Route exact path='/' render={() => <Articles posts={posts} />} />
+       {/* <Route exact path='/' render={() => <Articles posts={posts} />} />
       <Route 
         path='/article/:id' 
         render={props => <Article {...props} posts={posts} />} 
       />
        <Route 
         path='/update/:id' 
-        render={props => <EditArticle {...props} posts={posts} />} 
+        render={props => <EditArticle {...props} posts={posts} />}  */}
       />
-        <Route path='/add-article' component={AddArticle} />
+        <Route path='/add-article' component={AddArticle} /> 
 
       </div>
     );
